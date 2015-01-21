@@ -46,6 +46,8 @@
 	                </li>
 	            </ul>
 	            
+	            <a href="#" class="filtersPanel_add">+</a>
+	            
 	        </div>
 	    </div>
 	    
