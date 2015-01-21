@@ -23,7 +23,9 @@
 	    <a href="#" class="reader_filters_panelButton icon-params"></a>
 	    
 	    <div class="reader_filtersPanel">
-	        <header class="reader_filtersPanel_header"></header>
+	        <header class="reader_filtersPanel_header">
+	            <span>fermer</span> 
+	        </header>
 	        <div class="reader_filtersPanel_content">
 	            
 	            <div class="filtersPanel_search">
@@ -106,6 +108,15 @@
 	                <a href="#">Lire la suite</a>
 	            </div>
 	        </article>
+	    </div>
+	    
+	</div>
+	
+	<div class="reader_addZone">
+	    
+	    <div class="reader_addZone_wrapper">
+            <p>Texte</p>
+	        <input type="text" class="reader_addZone_input">
 	    </div>
 	    
 	</div>

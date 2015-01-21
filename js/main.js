@@ -24,7 +24,7 @@ function resizeContent(){
 }
 
 function initPanel(){
-    $('.reader_filters_panelButton').click(function(e){
+    $('.reader_filters_panelButton, .reader_filtersPanel_header span').click(function(e){
         e.preventDefault();
         $('.reader_filters').toggleClass('opened');
         $('.reader_content').toggleClass('panel_shown');
