@@ -264,6 +264,11 @@
                     }
                 }
             }
+
+            .filtersPanel_noFeeds{
+                margin: 20px;
+                text-align: center;
+            }
             
             .filtersPanel_add{
                 position: absolute;
@@ -283,12 +288,7 @@
                 
                 transform: translate3d(50%,-50%,0);
                 .transition(.2s);
-                .box-shadow;
-                
-                &:hover{
-                    transform: translate3d(50%,-50%,0) scale(1.05,1.05) rotate(180deg);
-                    box-shadow: 0 0 12px rgba(0,0,0,.3);
-                }
+                .box-shadow-button;
                 
                 &:active{
                     background-color: @c_dmain;

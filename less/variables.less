@@ -11,7 +11,7 @@
 @c_vlthird: #eee;
 @c_third: #aaa;
 
-@c_text : #333;
+@c_text : #666;
 
 @c_black : #000;
 @c_white : #fff;
@@ -19,7 +19,15 @@
 //Mixins
 
 .box-shadow(){
-    box-shadow: 0 0 8px rgba(0,0,0,.3);
+    box-shadow: 0 1px 6px rgba(0,0,0,.34);
+}
+
+.box-shadow-button(){
+    box-shadow: 0 0 4px rgba(0,0,0,.2),0 4px 4px rgba(0,0,0,.3);
+    
+    &:hover{
+        box-shadow: 0 2px 4px rgba(0,0,0,.2),0 6px 6px rgba(0,0,0,.3);
+    }
 }
 
 .transition(@time : .3s){

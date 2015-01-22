@@ -19,6 +19,8 @@
 	    <h1>Dev <span>Reader</span></h1>
 	</header>
 	
+    <!-- FILTERS -->
+    
 	<div class="reader_filters">
 	    <a href="#" class="reader_filters_panelButton icon-params"></a>
 	    
@@ -28,19 +30,18 @@
 	        </header>
 	        <div class="reader_filtersPanel_content">
 	            
-	            <div class="filtersPanel_search g_standaloneField">
+	            <div class="filtersPanel_search g_standaloneField" data-bind="visible: feedsList().length > 0">
 	                <label for="filtersPanel_searchInput" class="icon-search"></label>
 	                <input type="text" name="filtersPanel_searchInput" id="filtersPanel_searchInput" class="g_textInput">
 	            </div>
 	            
-	            <ul class="filtersPanel_feedsList">
-                    <li rv-each-feed="feeds.feedsList" rv-hide="feeds.feedsList | empty">
-                        <input type="checkbox" rv-checked="feed.enabled" value="" rv-id="feed.id"> <label rv-for="feed.id">{ feed.name }</label>
-                    </li>
-                   
-                   <p rv-show="feeds.feedsList | empty">No feeds in your list</p>
-                    
+	            <ul class="filtersPanel_feedsList" data-bind="foreach: feedsList, visible: feedsList().length > 0">
+                    <li>
+                        <input type="checkbox" value="" data-bind="attr: {id:id,value:id}, checked: enabled" > <label data-bind="text: name, attr: {for:id}"></label>
+                    </li>                    
 	            </ul>
+	            
+	            <p class="filtersPanel_noFeeds"  data-bind="visible: feedsList().length == 0">No feeds in your list</p>
 	            
 	            <a href="#" class="filtersPanel_add">+</a>
 	            
@@ -50,7 +51,7 @@
 	    <div class="reader_overlay"></div>
 	</div>
 	
-	
+	<!-- CONTENT -->
 	
 	<div class="reader_content">
 	    
@@ -106,6 +107,8 @@
 	    
 	</div>
 	
+	<!-- ADDZONE -->
+	
 	<div class="reader_addZone">
     
         <a href="#" class="reader_addZone_close"><span>&times;</span> Cancel</a>
@@ -115,11 +118,13 @@
             <p>Please enter the new feed url :</p>
            
             <label for="reader_addZoneInput" class="icon-world"></label>
-            <input type="text" name="reader_addZoneInput" id="reader_addZoneInput" class="g_textInput" value="http://">
+            <input type="text" name="reader_addZoneInput" id="reader_addZoneInput" class="g_textInput" value="http://" data-bind="event: {keypress: addFeed}">
             
         </div>
 	    
 	</div>
+	
+	<!-- LOADER -->
 	
 	<div class="reader__loader">
 	    <div class="reader_loaderWrapper">
@@ -134,7 +139,7 @@
 	
 	<script src="js/jquery.min.js" defer></script>
 	<script src="js/imgliquid.js" defer></script>
-	<script src="js/rivets.js" defer></script>
+	<script src="js/ko.js" defer></script>
 	<script src="js/Feeds.js" defer></script>
 	<script src="js/ui.js" defer></script>
 </body>

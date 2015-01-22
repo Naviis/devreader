@@ -9,8 +9,6 @@ $(function(){
     
     $(".imgl").imgLiquid();
     
-    initRivets();
-    
 });
 
 function resizeContent(){
@@ -43,15 +41,4 @@ function initPanel(){
         e.preventDefault();
         $('.reader_addZone').removeClass('opened');
     });
-}
-
-function initRivets(){
-    
-    rivets.formatters.empty = function(feedsList){        
-        var result = feedsList.length == 0;
-        return result;      
-    }
-    
-    rivets.bind($('.filtersPanel_feedsList'), {feeds: feeds});
-
 }
