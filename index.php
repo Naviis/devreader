@@ -34,13 +34,11 @@
 	            </div>
 	            
 	            <ul class="filtersPanel_feedsList">
-                    <li rv-each-feed="feeds.feedsList" data-hide="feeds.feedsList | empty">
+                    <li rv-each-feed="feeds.feedsList" rv-hide="feeds.feedsList | empty">
                         <input type="checkbox" rv-checked="feed.enabled" value="" rv-id="feed.id"> <label rv-for="feed.id">{ feed.name }</label>
                     </li>
                    
-                   <li data-show="feeds.feedsList | empty">
-	                   test
-	                </li>
+                   <p rv-show="feeds.feedsList | empty">No feeds in your list</p>
                     
 	            </ul>
 	            

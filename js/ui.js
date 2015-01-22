@@ -46,15 +46,12 @@ function initPanel(){
 }
 
 function initRivets(){
-
-    rivets.bind($('.filtersPanel_feedsList'), {feeds: feeds});
     
-    rivets.formatters.empty = function(feedsList){
-        
+    rivets.formatters.empty = function(feedsList){        
         var result = feedsList.length == 0;
-        
-        console.log(result);
         return result;      
     }
+    
+    rivets.bind($('.filtersPanel_feedsList'), {feeds: feeds});
 
 }
