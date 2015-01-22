@@ -10,3 +10,44 @@ body{
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
 }
+
+/*-----------------------------------------*|
+        $INPUTS 
+|*-----------------------------------------*/
+
+.g_standaloneField{
+    label, input{
+        display: inline-block;
+        vertical-align: middle;
+
+        color: @c_main;
+        font-size: 20px;
+    }
+
+    label{
+        font-size: 30px;
+    }
+    input{
+        padding: 5px;
+        
+        border: 0;
+        border-bottom: 2px solid @c_main;
+        font-weight: 300;
+
+        outline: none;
+
+        .transition;
+
+        &:focus{
+            background-color: @c_vlmain;
+        }
+    }
+    
+    p{
+        color: @c_main;
+        margin: 0 0 20px;
+        
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+}

@@ -1,3 +1,64 @@
+/*-----------------------------------------*|
+        $LOADER 
+|*-----------------------------------------*/
+
+.reader__loader{
+    position: fixed;
+    display: table;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-color: @c_white;
+    
+    .box-shadow;
+    .transition(.5s);
+    
+    z-index: 100;
+    
+    &.hidden{
+        transform: translateY(-100%);
+    }
+}
+    .reader_loaderWrapper{
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+        height: 100%;
+        
+        text-align: center;
+        
+        p{
+            color: @c_main;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    }
+        .reader_loaderProgressBar{
+            margin: 0 auto;
+            width: 300px;
+            height: 5px;
+            box-shadow: 0 0 2px fadeOut(@c_black,80%);
+            
+            overflow: hidden;
+            
+            &:after{
+                content: '';
+                display: block;
+                height: 5px;
+                background-color: @c_main;
+                
+                transform: translateX(-100%);
+                animation: loader infinite 2s;
+            }
+        }
+
+        @keyframes loader{
+            0%{ transform: translateX(-100%); }
+            100%{ transform: translateX(100%); }
+        }
+
 /*************************\
     $HEADER
 \*************************/
@@ -33,19 +94,6 @@
     background-color: @c_white;
     
     .box-shadow();
-    
-    &.opened{
-        .reader_filtersPanel{
-            transform: translateX(0);
-        }
-        .reader_filters_panelButton{
-            color: @c_white;
-        }
-        .reader_overlay{
-            visibility: visible;
-            opacity: 1;
-        }
-    }
 }
 
     .reader_filters_panelButton{
@@ -58,6 +106,10 @@
         overflow-x: hidden;
         
         z-index: 2;
+        
+        .opened &{
+            color: @c_white;
+        }
     }
 
     .reader_overlay{
@@ -67,11 +119,16 @@
         height: 100%;
         width: 100%;
 
-        background-color: rgba(0,0,0,.3);
+        background-color: fadeOut(@c_white,10%);
         opacity: .1;
         visibility: hidden;
         
         .transition;
+        
+        .opened &{
+            visibility: visible;
+            opacity: 1;
+        }
     }
 
     .reader_filtersPanel{
@@ -89,6 +146,10 @@
         .transition();
         
         z-index: 1;
+        
+        .opened &{
+            transform: translateX(0);
+        }
     }
 
         .reader_filtersPanel_header{
@@ -109,38 +170,17 @@
 
         .reader_filtersPanel_content{
             overflow: auto;
+            overflow-x: hidden;
         }
 
             .filtersPanel_search{
                 padding: 20px;
-                
-                label, input{
-                    display: inline-block;
-                    vertical-align: middle;
-                    
-                    color: @c_main;
-                    font-size: 20px;
-                }
-                
+
                 label{
                     width: 14%;
-                    font-size: 30px;
                 }
                 input{
-                    padding: 5px;
                     width: 84%;
-                    
-                    border: 0;
-                    border-bottom: 2px solid @c_main;
-                    font-weight: 300;
-                    
-                    outline: none;
-                    
-                    .transition;
-                    
-                    &:focus{
-                        background-color: @c_vlmain;
-                    }
                 }
             }
 
@@ -267,15 +307,57 @@
     width: 100%;
     height: 100%;
     
-    background-color: fadeOut(@c_dmain,10%);
+    background-color: @c_white;
+    
+    .box-shadow;
+    
+    transform: scale(0,0);
+    visibility: hidden;
     
     z-index: 3;
+    
+    .transition;
+    
+    &.opened{
+        visibility: visible;
+          transform: scale(1,1);
+    }
 }
 
     .reader_addZone_wrapper{
         display: table-cell;
         vertical-align: middle;
         text-align: center;
+        
+        input{
+            width: 50%;
+        }
+    }
+
+    .reader_addZone_close{
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        
+        color: @c_main;
+        font-size: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+        
+        span{
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+            
+            font-size: 15px;
+            line-height: 16px;
+            text-align: center;
+            
+            border: 2px solid @c_main;
+            border-radius: 50%;
+        }
     }
 
 /*************************\

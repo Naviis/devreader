@@ -1,11 +1,15 @@
 $(function(){
     
+    $('.reader__loader').addClass('hidden');
+    
     resizeContent();
     initPanel();
     
     $(window).resize(resizeContent);
     
     $(".imgl").imgLiquid();
+    
+    initRivets();
     
 });
 
@@ -29,4 +33,28 @@ function initPanel(){
         $('.reader_filters').toggleClass('opened');
         $('.reader_content').toggleClass('panel_shown');
     });
+    
+    $('.filtersPanel_add').click(function(e){
+        e.preventDefault();
+        $('.reader_addZone').addClass('opened');
+    });
+    
+    $('.reader_addZone_close').click(function(e){
+        e.preventDefault();
+        $('.reader_addZone').removeClass('opened');
+    });
+}
+
+function initRivets(){
+
+    rivets.bind($('.filtersPanel_feedsList'), {feeds: feeds});
+    
+    rivets.formatters.empty = function(feedsList){
+        
+        var result = feedsList.length == 0;
+        
+        console.log(result);
+        return result;      
+    }
+
 }

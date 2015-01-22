@@ -24,28 +24,24 @@
 	    
 	    <div class="reader_filtersPanel">
 	        <header class="reader_filtersPanel_header">
-	            <span>fermer</span> 
+	            <span>close</span> 
 	        </header>
 	        <div class="reader_filtersPanel_content">
 	            
-	            <div class="filtersPanel_search">
+	            <div class="filtersPanel_search g_standaloneField">
 	                <label for="filtersPanel_searchInput" class="icon-search"></label>
-	                <input type="text" name="filtersPanel_searchInput" id="filtersPanel_searchInput">
+	                <input type="text" name="filtersPanel_searchInput" id="filtersPanel_searchInput" class="g_textInput">
 	            </div>
 	            
 	            <ul class="filtersPanel_feedsList">
-	                <li>
-	                    <input type="checkbox" checked value="" id="feedsList_c1"> <label for="feedsList_c1">Codrops</label>
+                    <li rv-each-feed="feeds.feedsList" data-hide="feeds.feedsList | empty">
+                        <input type="checkbox" rv-checked="feed.enabled" value="" rv-id="feed.id"> <label rv-for="feed.id">{ feed.name }</label>
+                    </li>
+                   
+                   <li data-show="feeds.feedsList | empty">
+	                   test
 	                </li>
-                    <li>
-	                    <input type="checkbox" checked value="" id="feedsList_c2"> <label for="feedsList_c2">Smashing Magazine</label>
-	                </li>
-                    <li>
-	                    <input type="checkbox" checked value="" id="feedsList_c3"> <label for="feedsList_c3">Blog du webdesign</label>
-	                </li>
-                    <li>
-	                    <input type="checkbox" checked value="" id="feedsList_c4"> <label for="feedsList_c4">Tympanus</label>
-	                </li>
+                    
 	            </ul>
 	            
 	            <a href="#" class="filtersPanel_add">+</a>
@@ -113,12 +109,25 @@
 	</div>
 	
 	<div class="reader_addZone">
+    
+        <a href="#" class="reader_addZone_close"><span>&times;</span> Cancel</a>
 	    
-	    <div class="reader_addZone_wrapper">
-            <p>Texte</p>
-	        <input type="text" class="reader_addZone_input">
-	    </div>
+	    <div class="reader_addZone_wrapper g_standaloneField">
+            
+            <p>Please enter the new feed url :</p>
+           
+            <label for="reader_addZoneInput" class="icon-world"></label>
+            <input type="text" name="reader_addZoneInput" id="reader_addZoneInput" class="g_textInput" value="http://">
+            
+        </div>
 	    
+	</div>
+	
+	<div class="reader__loader">
+	    <div class="reader_loaderWrapper">
+            <p>Loading</p>
+	        <div class="reader_loaderProgressBar"></div>
+	    </div>	    
 	</div>
 	
 	<footer></footer>
@@ -127,6 +136,8 @@
 	
 	<script src="js/jquery.min.js" defer></script>
 	<script src="js/imgliquid.js" defer></script>
-	<script src="js/main.js" defer></script>
+	<script src="js/rivets.js" defer></script>
+	<script src="js/Feeds.js" defer></script>
+	<script src="js/ui.js" defer></script>
 </body>
 </html>
