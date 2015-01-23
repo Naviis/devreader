@@ -1,5 +1,8 @@
 var FeedsViewModel = function(){
     this.feedsList = ko.observableArray([]);
+    this.feedsList.subscribe(function(){
+        $('.reader_addZone').removeClass('opened');
+    });
         
     this.defaultAddInputValue = 'http://';
     
@@ -24,8 +27,6 @@ FeedsViewModel.prototype = {
             });
         
             el.value = this.defaultAddInputValue;
-            
-            $('.reader_addZone').removeClass('opened');
         
             return false;
         }
