@@ -55,9 +55,6 @@
             <!-- ko foreach: entries -->
             <!-- ko if: $parent.checked -->
 	        <article class="r_content_card">
-	            <figure class="imgl">
-	                <img src="images/frozen.jpg" alt="">
-	            </figure>
 	            <div class="card_content">
 	                <h2 data-bind="text: title"></h2>
 	                <time datetime="2015-18-01">le 18/01/2015</time>

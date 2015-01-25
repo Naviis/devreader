@@ -94,6 +94,8 @@
     background-color: @c_white;
     
     .box-shadow();
+    
+    z-index: 2;
 }
 
     .r_filters_panelButton{
@@ -274,8 +276,8 @@
             
             .fp_add{
                 position: absolute;
-                right: 0;
-                top: 50%;
+                right: 20px;
+                bottom: 20px;
                 display: block;
                 width: 50px;
                 height: 50px;
@@ -288,7 +290,6 @@
                 background-color: @c_main;
                 border-radius: 50%;
                 
-                transform: translate3d(50%,-50%,0);
                 .transition(.2s);
                 .box-shadow-button;
                 

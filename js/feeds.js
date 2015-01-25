@@ -11,6 +11,8 @@ var FeedsViewModel = function(){
     // APi
     this.gFeed = null;
     
+    //simpleStorage.flush()
+    
     // Init
     this.init();
     
