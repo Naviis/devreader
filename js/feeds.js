@@ -9,12 +9,23 @@ var FeedsViewModel = function(){
     this.defaultAddInputValue = 'http://';
     
     // APi
-    this.gFeed = new GoogleFeed();
+    this.gFeed = null;
+    
+    // Init
+    this.init();
     
     return this;
 };
 
 FeedsViewModel.prototype = {
+    
+    init: function(){
+        this.gFeed = new GoogleFeed();
+        
+        if( simpleStorage.get('feeds') ){
+            this.parseLocalStorage();
+        }
+    },
   
     addFeed : function(data,event){
         
@@ -28,13 +39,8 @@ FeedsViewModel.prototype = {
             // Process
             this.gFeed.processFeed(value,function(feedProcessed){
                 if( !feedProcessed.error ){
-                    self.feedsList.push({
-                        id: 'feed_'+self.feedsList().length,
-                        url: value,
-                        name: name,
-                        checked: ko.observable(true),
-                        entries : feedProcessed.feed.entries
-                    });
+                    self.addNewFeedToList(value,name,feedProcessed.feed.entries);
+                    self.storeFeeds();
                 }else{
                     alert('error GFeed');
                 }          
@@ -53,6 +59,32 @@ FeedsViewModel.prototype = {
         l.href = href;
         var domain = (l.host.match(/([^.]+)\.\w{2,3}(?:\.\w{2})?$/) || [])[1];
         return domain;
+    },
+    
+    addNewFeedToList: function(url,name,entries){
+        this.feedsList.push({
+            id: 'feed_'+this.feedsList().length,
+            url: url,
+            name: name,
+            checked: ko.observable(true),
+            entries : entries
+        });
+    },
+    
+    // LOCAL STORAGE
+    
+    storeFeeds : function(){
+        var json = JSON.stringify(this.feedsList()) ;        
+        simpleStorage.set('feeds', json);
+    },
+    
+    parseLocalStorage: function(){
+        var feeds = JSON.parse(simpleStorage.get('feeds'));
+        
+        for( var i = 0; i < feeds.length; i++){            
+            var currentFeed = feeds[i];            
+            this.addNewFeedToList(currentFeed.url,currentFeed.name,currentFeed.entries);
+        }
     },
     
     // UI METHODS

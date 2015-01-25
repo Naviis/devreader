@@ -101,8 +101,9 @@
 	
 	
 	<script src="js/zepto.js"></script>
+	<script src="js/simpleStorage.js"></script>
 	<script src="js/ko.js"></script>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src="https://www.google.com/jsapi"></script>
 	<script src="js/gFeed.js"></script>
 	<script src="js/Feeds.js"></script>
 	<script src="js/ui.js"></script>
