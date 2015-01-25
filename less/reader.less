@@ -2,7 +2,7 @@
         $LOADER 
 |*-----------------------------------------*/
 
-.reader__loader{
+.r__loader{
     position: fixed;
     display: table;
     top: 0;
@@ -21,7 +21,7 @@
         transform: translateY(-100%);
     }
 }
-    .reader_loaderWrapper{
+    .r_loaderWrapper{
         display: table-cell;
         vertical-align: middle;
         width: 100%;
@@ -35,7 +35,7 @@
             text-transform: uppercase;
         }
     }
-        .reader_loaderProgressBar{
+        .r_loaderProgressBar{
             margin: 0 auto;
             width: 300px;
             height: 5px;
@@ -63,7 +63,7 @@
     $HEADER
 \*************************/
 
-.reader_header{
+.r_header{
     position: relative;
     padding: 20px;
     
@@ -86,7 +86,7 @@
     $FILTERS
 \*************************/
 
-.reader_filters{
+.r_filters{
     position: relative;
     padding: 10px;
     height: 40px;
@@ -96,7 +96,7 @@
     .box-shadow();
 }
 
-    .reader_filters_panelButton{
+    .r_filters_panelButton{
         position: relative;
         color: @c_dmain;
         font-size: 20px;
@@ -112,7 +112,7 @@
         }
     }
 
-    .reader_overlay{
+    .r_overlay{
         position: absolute;
         top: 0;
         left: 0;
@@ -131,7 +131,7 @@
         }
     }
 
-    .reader_filtersPanel{
+    .r_fp{
         position: absolute;
         top: 0;
         left: 0;
@@ -152,7 +152,7 @@
         }
     }
 
-        .reader_filtersPanel_header{
+        .r_fp_header{
             padding: 0 20px;
             height: 40px;
             
@@ -168,12 +168,12 @@
             }
         }
 
-        .reader_filtersPanel_content{
+        .r_fp_content{
             overflow: auto;
             overflow-x: hidden;
         }
 
-            .filtersPanel_search{
+            .fp_search{
                 padding: 20px;
 
                 label{
@@ -184,7 +184,7 @@
                 }
             }
 
-            .filtersPanel_feedsList{
+            .fp_feedsList{
                 padding: 0;
                 left: 0;
                                 
@@ -244,6 +244,8 @@
                         top: 3px;
                         left: -20px;
                         
+                        border-radius: 50%;
+                        
                         .transition;
                     }
                     
@@ -265,12 +267,12 @@
                 }
             }
 
-            .filtersPanel_noFeeds{
+            .fp_noFeeds{
                 margin: 20px;
                 text-align: center;
             }
             
-            .filtersPanel_add{
+            .fp_add{
                 position: absolute;
                 right: 0;
                 top: 50%;
@@ -299,7 +301,7 @@
     $ADD FEED INPUT
 \*************************/
 
-.reader_addZone{
+.r_addZone{
     position: fixed;
     display: table;
     top: 0;
@@ -324,7 +326,7 @@
     }
 }
 
-    .reader_addZone_wrapper{
+    .r_addZone_wrapper{
         display: table-cell;
         vertical-align: middle;
         text-align: center;
@@ -334,7 +336,7 @@
         }
     }
 
-    .reader_addZone_close{
+    .r_addZone_close{
         position: absolute;
         top: 30px;
         right: 30px;
@@ -364,32 +366,39 @@
     $CONTENT
 \*************************/
 
-.reader_content{
+.r_content{
     background-color: @c_vlthird;
     overflow: auto;
     
     &.panel_shown{
-        .reader_content_wpr{
+        .r_content_wpr{
             width: 80%;
             margin-left: 20%;
         }
     }
 }
 
-    .reader_content_wpr{
+    .r_content_wpr{
+        position: relative;
         padding: 20px;
         width: 100%;
         
         .transition;
     }
 
-        .reader_content_card{
+        .r_content_card{
             padding: 20px;           
             background-color: @c_white;
             
             border-bottom: @c_vlthird 1px solid;
             
             .cf;
+            
+            @keyframes showArticle{
+                1%{transform: translateX(-100%); opacity: 0;}
+                100%{transform: translateX(0); opacity: 1;}
+            }
+            
             figure{
                 float: left;
                 margin: 0 20px 0 0;
@@ -398,6 +407,13 @@
                 background-color: @c_third;
                 border-bottom-left-radius: 3px;
                 border-top-left-radius: 3px;
+                
+                background-size: cover;
+            }
+            
+            img{
+                width: 100%;
+                max-width: 100%;
             }
         }
 
