@@ -51,3 +51,37 @@ body{
         text-transform: uppercase;
     }
 }
+
+/*-----------------------------------------*|
+        $NOTIFICATION 
+|*-----------------------------------------*/
+
+.g_notification{
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    padding: 10px;
+    width: 200px;
+    
+    background-color: @c_black;
+    color: @c_white;
+    font-size: 12px;
+    text-align: center;
+    
+    transform: translateY(120%);
+    .transition;
+    
+    z-index: 10;
+    
+    &.active{
+        transform: translateY(0);
+    }
+    
+    &.error{
+        background-color: @c_error;
+    }
+    
+    &.success{
+        background-color: @c_success;
+    }
+}

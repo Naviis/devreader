@@ -5,6 +5,7 @@ var FeedsViewModel = function(){
     this.addPanelOpened = ko.observable(false); 
     
     this.feedsList = ko.observableArray([]);
+    this.currentFeed = ko.observable(null);
         
     this.defaultAddInputValue = 'http://';
     
@@ -23,7 +24,7 @@ FeedsViewModel.prototype = {
     
     init: function(){
         this.gFeed = new GoogleFeed();
-        
+
         if( simpleStorage.get('feeds') ){
             this.parseLocalStorage();
         }
@@ -39,17 +40,10 @@ FeedsViewModel.prototype = {
             var name = this.getDomainName(value);
             
             // Process
-            this.gFeed.processFeed(value,function(feedProcessed){
-                if( !feedProcessed.error ){
-                    self.addNewFeedToList(value,name,feedProcessed.feed.entries);
-                    self.storeFeeds();
-                }else{
-                    alert('error GFeed');
-                }          
-
+            this.getFeed(value, name, true, function(){
                 el.value = self.defaultAddInputValue;
                 self.toggleAddPanel();
-            });
+            });            
         }
         
         return true;
@@ -63,20 +57,50 @@ FeedsViewModel.prototype = {
         return domain;
     },
     
+    getFeed: function(value, name,newFeed, callback){
+        
+        var self = this;
+        this.gFeed.processFeed(value,function(feedProcessed){
+            if( !feedProcessed.error ){
+                self.addNewFeedToList(value,name,feedProcessed.feed.entries);
+                self.storeFeeds();
+                
+                if(newFeed)
+                    new Notification('The feed was successfully added','success');
+            }else{
+                new Notification('The feed \''+name+'\' is invalid','error');
+            }          
+            
+            if( callback )
+                callback();
+        });
+    },
+    
     addNewFeedToList: function(url,name,entries){
+        
+        var id = 'feed_'+this.feedsList().length;
         this.feedsList.push({
-            id: 'feed_'+this.feedsList().length,
+            id: id,
             url: url,
             name: name,
-            checked: ko.observable(true),
+            checked: ko.observable(false),
             entries : entries
         });
+        
+        this.currentFeed(id);
     },
     
     // LOCAL STORAGE
     
     storeFeeds : function(){
-        var json = JSON.stringify(this.feedsList()) ;        
+
+        var feedsStorage = [];
+        for( var i = 0; i < this.feedsList().length; i++){            
+            var currentFeed = this.feedsList()[i];            
+            feedsStorage[i] = {url:currentFeed.url,name:currentFeed.name};
+        }
+        
+        var json = JSON.stringify(feedsStorage);
         simpleStorage.set('feeds', json);
     },
     
@@ -84,8 +108,8 @@ FeedsViewModel.prototype = {
         var feeds = JSON.parse(simpleStorage.get('feeds'));
         
         for( var i = 0; i < feeds.length; i++){            
-            var currentFeed = feeds[i];            
-            this.addNewFeedToList(currentFeed.url,currentFeed.name,currentFeed.entries);
+            var currentFeed = feeds[i];  
+            this.getFeed(currentFeed.url,currentFeed.name, false);
         }
     },
     

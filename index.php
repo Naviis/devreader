@@ -35,7 +35,7 @@
 	            
 	            <ul class="fp_feedsList" data-bind="foreach: feedsList, visible: feedsList().length > 0">
                     <li>
-                        <input type="checkbox" value="" data-bind="attr: {id:id,value:id}, checked: checked" > <label data-bind="text: name, attr: {for:id}"></label>
+                        <input type="radio" value="" name="currentFeed" data-bind="attr: {id:id,value:id}, checked: $root.currentFeed" > <label data-bind="text: name, attr: {for:id}"></label>
                     </li>                    
 	            </ul>
 	            
@@ -51,9 +51,10 @@
 	
 	<div class="r_content" data-bind="css : { panel_shown : feedsPanelOpened}">
 	    
-	    <div class="r_content_wpr" data-bind="foreach: feedsList">
+	    <div class="r_content_wpr">
+            <!-- ko foreach: feedsList -->
+            <!-- ko if: $root.currentFeed() == id -->
             <!-- ko foreach: entries -->
-            <!-- ko if: $parent.checked -->
 	        <article class="r_content_card">
 	            <div class="card_content">
 	                <h2 data-bind="text: title"></h2>
@@ -64,8 +65,10 @@
 	        </article>        
             <!-- /ko -->	        
             <!-- /ko -->	        
+            <!-- /ko -->
+            <p class="fp_noFeeds"  data-bind="visible: feedsList().length == 0">No feeds in your list</p>	        
 	    </div>
-	    <p class="fp_noFeeds"  data-bind="visible: feedsList().length == 0">No feeds in your list</p>
+	    
 	</div>
 	
 	<!-- ADDZONE -->
@@ -101,7 +104,9 @@
 	<script src="js/simpleStorage.js"></script>
 	<script src="js/ko.js"></script>
 	<script src="https://www.google.com/jsapi"></script>
+	<script>google.load("feeds", "1",'Feed');</script>
 	<script src="js/gFeed.js"></script>
+	<script src="js/notification.js"></script>
 	<script src="js/Feeds.js"></script>
 	<script src="js/ui.js"></script>
 </body>

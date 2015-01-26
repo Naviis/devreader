@@ -1,5 +1,5 @@
 var GoogleFeed = function(){
-    google.load("feeds", "1",'Feed');
+    
     return this;
 };
 
